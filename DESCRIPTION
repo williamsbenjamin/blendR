@@ -2,10 +2,12 @@ Package: blendR
 Type: Package
 Title: Blending a Probablilty Sample and a Non-Probability Sample in a Capture-Recapture Setting
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: Benjamin Williams
+Maintainer: Benjamin Williams <benjamin@smu.edu>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.0.1
+Imports: stats
