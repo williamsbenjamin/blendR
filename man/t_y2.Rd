@@ -2,16 +2,20 @@
 % Please edit documentation in R/t_y2.R
 \name{t_y2}
 \alias{t_y2}
-\title{Generalized Capture-Recapture Estimator of Total for Complex Sample,
-  Using Values of Total from Capture Sample as Auxiliary Information'}
+\title{Multivariate Ratio Estimator of Total for Complex Sample, from Liu et
+  al (2017)}
 \usage{
 t_y2(delta, captured, survey_design, na_remove = T, capture_units,
   total_from_capture)
 }
 \arguments{
-\item{delta}{For Every Unit in the Recapture Sample, Delta is the value of
-the variable of interest Observed in the Recapture Sample minus the value
-observed in the Capture Sample}
+\item{delta}{For Every Unit in the Recapture Sample, Delta is the Value of
+the Variable of Interest Observed in the Recapture Sample Minus the Value
+Observed in the Capture Sample. \eqn{\delta = y_i - r_iy*_i} where
+\eqn{y_i} is the Value of the Variable of Interest for the ith unit in the
+Recapture Sample, \eqn{r_i} is an Indicator of whether the unit is a Member
+of the Capture Sample, and \eqn{y*_i} is the Value of the Variable of
+Interest in the Capture Sample}
 
 \item{captured}{Indicator Variable of Unit being in Capture Sample}
 
@@ -32,18 +36,21 @@ Estimate of Total and Standard Error of Estimate
   \item{se}{Standard Error of Estimate of Total}
 }
 \description{
-Make an Estimate of Total Using a Generalized Capture-Recapture
-  Estimator from Liu et al (2017) for a Complex Sample Setting. Uses total of
-  variable of interest from the capture sample as auxiliary information
+Make an Estimate of Total Using a Weighted Combination of
+  \code{\link{t_p}} and \code{\link{t_y2}} from Liu et al (2017) for a
+  Complex Sample Setting.
 }
 \details{
-This estimator is a ratio estimator defined by: \eqn{t_c = t_y*
-  \frac{\hat{t}_y}{\hat{t}_y*}} with ratio \eqn{ t_y / t_y*}. \eqn{\hat{t}_y
-  = \sum{i=1}^{N}w_i  z_i  y_i} where \eqn{z_i} is a sampling indicator,
-  \eqn{w_i} is the sampling weight, and \eqn{y_i} is the value of the
-  variable of interest observed in the recapture sample. There are \eqn{N}
-  units in the population. \eqn{y*_i} is the value of the variable of
-  interest recorded in the recapture sample. \eqn{t_y* = \sum{i
-  =1}^{N}r_iy*_i} \eqn{r_i} is an indicator of whether the unit is a member
-  of the recapture sample.
+This estimator is defined by: \eqn{t_y2 = t_{y*} +
+  \frac{n_1}{\hat{n}_1}(\hat{t}_y - \hat{t}_{y*}) = t_{y*} +
+  n_1\hat{bar{\delta}}}. This amounts to a ratio estimator of \eqn{\delta}
+  over \hat{n_1} with auxiliary information \eqn{n_1} added to \eqn{t_{y*}}.
+  \eqn{\delta = y_i - r_iy*_i}, \eqn{\hat{t}_y = \sum{i=1}^{N}w_i  z_i y_i},
+  \eqn{z_i} is a sampling indicator, \eqn{w_i} is the sampling weight,
+  \eqn{y_i} is the value of the variable of interest observed in the
+  Recapture sample, \eqn{y*_i} is the value of the variable of interest
+  observed in the Capture sample. There are \eqn{N} units in the population.
+  \eqn{y*_i} is the value of the variable of interest recorded in the
+  recapture sample. \eqn{t_{y*} = \sum{i =1}^{N}r_iy*_i} \eqn{r_i} is an
+  indicator of whether the unit is a member of the recapture sample.
 }
