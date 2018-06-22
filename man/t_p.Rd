@@ -7,7 +7,7 @@
 t_p(recapture_total, captured, survey_design, na_remove = T, capture_units)
 }
 \arguments{
-\item{recapture_total}{Variable of Total of Interest for a Recapture Sample
+\item{recapture_total}{Variable of Total of Interest from a Recapture Sample
 Observation}
 
 \item{captured}{Indicator Variable of Unit being in Capture Sample}
@@ -26,7 +26,8 @@ Estimate of Total and Standard Error of Estimate
 }
 \description{
 Make an Estimate of Total Using Pollock et al's (1994) Estimator
-Generalized by Liu et al (2017) for a Complex Sample Setting
+Generalized by Liu et al (2017) for a Complex Sample Setting. Use number
+of capture units as auxiliary information
 }
 \details{
 This estimator is a ratio estimator defined by: \eqn{t_p = n_1 *
@@ -37,5 +38,6 @@ observed in the recapture sample. There are \eqn{N} units in the population.
 \eqn{t_y} is estimated by \eqn{\hat{t}_y = \sum{i \in s_2}y_i} and
 \eqn{n_1} is estimated by \eqn{\hat{n}_1 = \sum{i \in s_2}r_i} where
 \eqn{r_i} is an indicator of whether the unit seen in the recapture sample
-was seen in the capture sample
+was seen in the capture sample. \eqn{n_1} is the total number of units
+seen in the capture sample
 }
