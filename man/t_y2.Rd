@@ -44,7 +44,7 @@ Make an Estimate of Total Using a Weighted Combination of
 This estimator is defined by: \eqn{t_y2 = t_{y*} +
   \frac{n_1}{\hat{n}_1}(\hat{t}_y - \hat{t}_{y*}) = t_{y*} +
   n_1\hat{bar{\delta}}}. This amounts to a ratio estimator of \eqn{\delta}
-  over \hat{n_1} with auxiliary information \eqn{n_1} added to \eqn{t_{y*}}.
+  over \eqn{\hat{n_1}} with auxiliary information \eqn{n_1} added to \eqn{t_{y*}}.
   \eqn{\delta = y_i - r_iy*_i}, \eqn{\hat{t}_y = \sum{i=1}^{N}w_i  z_i y_i},
   \eqn{z_i} is a sampling indicator, \eqn{w_i} is the sampling weight,
   \eqn{y_i} is the value of the variable of interest observed in the
