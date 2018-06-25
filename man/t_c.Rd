@@ -5,7 +5,7 @@
 \title{Generalized Capture-Recapture Estimator of Total for Complex Sample,
   Using Values of Total from Capture Sample as Auxiliary Information}
 \usage{
-t_c(recapture_total, captured_total, survey_design, na_remove = T,
+t_c(recapture_total, captured_total, survey_design, na_remove = TRUE,
   total_from_capture)
 }
 \arguments{

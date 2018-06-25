@@ -30,7 +30,7 @@
  t_c <- function(recapture_total,
                  captured_total,
                  survey_design,
-                 na_remove=T,
+                 na_remove=TRUE,
                  total_from_capture){
    tc_ratio <- survey::svyratio(~recapture_total,
                                 ~captured_total,
