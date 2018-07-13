@@ -3,7 +3,7 @@
 \docType{data}
 \name{red_snapper_sampled}
 \alias{red_snapper_sampled}
-\title{Fish dataset}
+\title{2016 Texas Parks and Wildlife Red Snapper Capture-Recapture Dataset}
 \format{A data frame with 398 rows and 11 variables:
 
 \describe{

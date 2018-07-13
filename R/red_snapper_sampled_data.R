@@ -1,4 +1,4 @@
-#' @title Fish dataset
+#' @title 2016 Texas Parks and Wildlife Red Snapper Capture-Recapture Dataset
 #'
 #'@description A dataset from a 2016 capture-recapture sampling program
 #'by Texas Parks and Wildlife. A probability sample of
@@ -22,7 +22,7 @@
 #' \item{number_caught_np}{Number of Red Snapper fish caught, as reported by captains, a non-probability sample}
 #' \item{anglers_np}{Number of anglers on fishing trip,as reported by captains, a non-probability sample}
 #' \item{captured_indicator}{Indicator of whether the sampled trip also self-reported}
-#' \item{delta_catch}{Difference between number_caught_ps and number_caught_np},
+#' \item{delta_catch}{Difference between number_caught_ps and number_caught_np}
 #' \item{delta_angler}{Difference between anglers_ps and anglers_np}}
 #'
 
