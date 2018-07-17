@@ -12,7 +12,7 @@ t_c(recapture_total, captured_total, survey_design, na_remove = TRUE,
 \item{recapture_total}{Variable of Total of Interest from a Recapture Sample
 Observation}
 
-\item{captured_total}{Variable of Total of Interest from a Capture Sample
+\item{captured_total}{Variable of Total of Interest Obtained in Capture Sample
 Observation}
 
 \item{survey_design}{A complex survey design specified with
@@ -20,7 +20,7 @@ Observation}
 
 \item{na_remove}{Remove NA's? Logical}
 
-\item{capture_units}{Total of Variable of Interest from all Units in the
+\item{total_from_capture}{Total of Variable of Interest from all Units in the
 Capture Sample}
 }
 \value{

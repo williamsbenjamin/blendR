@@ -23,6 +23,18 @@ Observation}
 Estimate of Total and Standard Error of Estimate
   \item{total}{Estimate of Total of a Variable in Population}
   \item{se}{Standard Error of Estimate of Total}
+
+  @example
+  s_design <- survey::svydesign(id = ~psu,
+                               strat = ~stratum,
+                               prob = ~prob,
+                               nest = T,
+                               data = red_snapper_sampled)
+
+  t_p(recapture_total = red_snapper_sampled$number_caught_ps,
+      captured = red_snapper_sampled$captured_indicator,
+      survey_design = s_design,
+      capture_units = nrow(self_reports))
 }
 \description{
 Make an Estimate of Total Using Pollock et al's (1994) Estimator

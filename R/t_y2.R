@@ -1,5 +1,4 @@
-#' @title Multivariate Ratio Estimator of Total for Complex Sample, from Liu et
-#'   al (2017)
+#' @title Multivariate Ratio Estimator of Total for Complex Sample
 #' @description Make an Estimate of Total Using a Weighted Combination of
 #'   \code{\link{t_p}} and \code{\link{t_y2}} from Liu et al (2017) for a
 #'   Complex Sample Setting.
@@ -11,13 +10,11 @@
 #'   of the Capture Sample, and \eqn{y*_i} is the Value of the Variable of
 #'   Interest in the Capture Sample
 #' @param captured Indicator Variable of Unit being in Capture Sample
-#' @param captured_total Variable of Total of Interest from a Capture Sample
-#'   Observation
 #' @param survey_design A complex survey design specified with
 #'   \code{survey::svydesign()}
 #' @param na_remove Remove NA's? Logical
-#' @param capture_units Total of Variable of Interest from all Units in the
-#'   Capture Sample
+#' @param capture_units Total Number of Units in the Capture Sample
+#' @param total_from_capture Total of Variable of Interest from Capture Sample
 #' @details This estimator is defined by: \eqn{t_y2 = t_{y*} +
 #'   \frac{n_1}{\hat{n}_1}(\hat{t}_y - \hat{t}_{y*}) = t_{y*} +
 #'   n_1\hat{bar{\delta}}}. This amounts to a ratio estimator of \eqn{\delta}

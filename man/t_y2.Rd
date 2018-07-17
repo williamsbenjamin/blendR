@@ -2,8 +2,7 @@
 % Please edit documentation in R/t_y2.R
 \name{t_y2}
 \alias{t_y2}
-\title{Multivariate Ratio Estimator of Total for Complex Sample, from Liu et
-  al (2017)}
+\title{Multivariate Ratio Estimator of Total for Complex Sample}
 \usage{
 t_y2(delta, captured, survey_design, na_remove = T, capture_units,
   total_from_capture)
@@ -24,11 +23,9 @@ Interest in the Capture Sample}
 
 \item{na_remove}{Remove NA's? Logical}
 
-\item{capture_units}{Total of Variable of Interest from all Units in the
-Capture Sample}
+\item{capture_units}{Total Number of Units in the Capture Sample}
 
-\item{captured_total}{Variable of Total of Interest from a Capture Sample
-Observation}
+\item{total_from_capture}{Total of Variable of Interest from Capture Sample}
 }
 \value{
 Estimate of Total and Standard Error of Estimate

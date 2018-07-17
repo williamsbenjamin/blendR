@@ -6,12 +6,12 @@
 #' @param recapture_total Variable of Total of Interest from a Recapture Sample
 #'   Observation
 #'
-#' @param captured_total Variable of Total of Interest from a Capture Sample
+#' @param captured_total Variable of Total of Interest Obtained in Capture Sample
 #'   Observation
 #' @param survey_design A complex survey design specified with
 #'   \code{survey::svydesign()}
 #' @param na_remove Remove NA's? Logical
-#' @param capture_units Total of Variable of Interest from all Units in the
+#' @param total_from_capture Total of Variable of Interest from all Units in the
 #'   Capture Sample
 #' @details This estimator is a ratio estimator defined by: \eqn{t_c = t_y*
 #'   \frac{\hat{t}_y}{\hat{t}_y*}} with ratio \eqn{ t_y / t_y*}. \eqn{\hat{t}_y
@@ -25,6 +25,17 @@
 #' @return Estimate of Total and Standard Error of Estimate
 #'   \item{total}{Estimate of Total of a Variable in Population}
 #'   \item{se}{Standard Error of Estimate of Total}
+#'
+#' @example
+#'   s_design <- survey::svydesign(id = ~psu,
+#'                                strat = ~stratum,
+#'                                prob = ~prob,
+#'                                nest = T,
+#'                                data = red_snapper_sampled)
+#'   t_c(recapture_total = red_snapper_sampled$number_caught_ps,
+#'       captured_total = red_snapper_sampled$number_caught_np,
+#'       survey_design = s_design,
+#'       total_from_capture = sum(self_reports$number_kept))
 #' @export
 
  t_c <- function(recapture_total,
