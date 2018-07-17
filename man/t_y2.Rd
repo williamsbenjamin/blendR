@@ -8,6 +8,13 @@ t_y2(data, delta, captured, survey_design, na_remove = T, capture_units,
   total_from_capture)
 }
 \arguments{
+\item{data}{A data frame, each row is an observation from the recapture sample.
+If the row refers to a unit which is also in the capture sample, the data frame
+contains the information gathered from the recapture sample. If the row refers
+to a unit only in the recapture sample, those columns for recapture sample data
+contain zeros. The data frame should contain a variable delta, see below, and
+and sample design information.}
+
 \item{delta}{Name of variable from given data frame. For every unit in the
 recapture sample, delta is the value of the variable of interest observed
 in the recapture sample minus the value observed in the capture sample. If the
@@ -29,8 +36,8 @@ capture sample}
 }
 \value{
 Estimate of Total and Standard Error of Estimate
-  \item{total}{Estimate of Total of a Variable in Population}
-  \item{se}{Standard Error of Estimate of Total}
+  \item{total}{Estimate of total of variable of interest in population}
+  \item{se}{Standard error of estimate of total}
 
  @example
  s_design <- survey::svydesign(id = ~psu,
@@ -49,12 +56,6 @@ t_y2(data = red_snapper_sampled,
 Make an Estimate of Total Using a Weighted Combination of
   \code{\link{t_p}} and \code{\link{t_y2}} from Liu et al (2017) for a
   Complex Sample Setting.
-
- @param data A data frame, each row is an observation from the recapture sample.
-  If the row refers to a unit which is also in the capture sample, the data frame
-  contains the information gathered from the recapture sample. If the row refers
-  to a unit only in the recapture sample, those columns for recapture sample data
-  contain zeros. The data frame should contain a variable delta, see below.
 }
 \details{
 This estimator is defined by: \eqn{t_y2 = t_{y*} +

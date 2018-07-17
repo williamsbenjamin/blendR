@@ -8,7 +8,9 @@ t_p(data, recapture_total, captured, survey_design, na_remove = T,
   capture_units)
 }
 \arguments{
-\item{data}{A data frame, each row is an observation from the recapture sample}
+\item{data}{A data frame, each row is an observation from the recapture sample,
+containing information gathered in the recapture sample, whether or not the unit
+is also in the capture sample, and sample design information.}
 
 \item{recapture_total}{Name of variable of interest recorded in the recapture
 sample, from given data frame}
@@ -25,8 +27,8 @@ capture sample, from given data frame}
 }
 \value{
 Estimate of Total and Standard Error of Estimate
-  \item{total}{Estimate of Total of a Variable in Population}
-  \item{se}{Standard Error of Estimate of Total}
+  \item{total}{Estimate of total of a variable in population}
+  \item{se}{Standard error of estimate of total}
 }
 \description{
 Make an Estimate of Total Using Pollock et al's (1994) Estimator

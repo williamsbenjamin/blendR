@@ -4,11 +4,12 @@
 #'   \code{\link{t_p}} and \code{\link{t_y2}} from Liu et al (2017) for a
 #'   Complex Sample Setting.
 #'
-#'  @param data A data frame, each row is an observation from the recapture sample.
+#' @param data A data frame, each row is an observation from the recapture sample.
 #'   If the row refers to a unit which is also in the capture sample, the data frame
 #'   contains the information gathered from the recapture sample. If the row refers
 #'   to a unit only in the recapture sample, those columns for recapture sample data
-#'   contain zeros. The data frame should contain a variable delta, see below.
+#'   contain zeros. The data frame should contain a variable delta, see below, and
+#'   and sample design information.
 #'
 #' @param delta Name of variable from given data frame. For every unit in the
 #'   recapture sample, delta is the value of the variable of interest observed
@@ -43,8 +44,8 @@
 #'   indicator of whether the unit is a member of the recapture sample.
 #'
 #' @return Estimate of Total and Standard Error of Estimate
-#'   \item{total}{Estimate of Total of a Variable in Population}
-#'   \item{se}{Standard Error of Estimate of Total}
+#'   \item{total}{Estimate of total of variable of interest in population}
+#'   \item{se}{Standard error of estimate of total}
 #'
 #'  @example
 #'  s_design <- survey::svydesign(id = ~psu,

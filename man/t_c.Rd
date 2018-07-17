@@ -9,10 +9,19 @@ t_c(data, recapture_total, captured_total, survey_design, na_remove = TRUE,
   total_from_capture)
 }
 \arguments{
-\item{captured_total}{Total of Variable Interest as Recorded in Capture Sample.
-\code{captured_total} = 0 if unit is in the Recapture Sample Only}
+\item{data}{A data frame, each row is an observation from the recapture sample.
+If the row refers to a unit which is also in the capture sample, the data frame
+contains the information gathered from the recapture sample. If the row refers
+to a unit in the recapture sample only, those columns for recapture sample data
+contain zeros. The data frame also should contain sample design information.}
 
-\item{survey_design}{A Complex Survey Design, Specified with
+\item{recapture_total}{Name of variable of interest recorded in recapture sample
+Observation, from given data frame}
+
+\item{captured_total}{Name of variable of interest as Recorded in Capture Sample,
+from given data frame. \code{captured_total} = 0 if unit is in the Recapture Sample Only}
+
+\item{survey_design}{A complex survey design, specified with
 \code{survey::svydesign()}}
 
 \item{na_remove}{Remove NA's? Logical}
@@ -22,22 +31,13 @@ Capture Sample}
 }
 \value{
 Estimate of Total and Standard Error of Estimate
-  \item{total}{Estimate of Total of a Variable in Population}
-  \item{se}{Standard Error of Estimate of Total}
+  \item{total}{Estimate of total of variable of interest in population}
+  \item{se}{Standard error of estimate of total}
 }
 \description{
 Make an Estimate of Total Using a Generalized Capture-Recapture
   Estimator from Liu et al (2017) for a Complex Sample Setting. Uses total of
   variable of interest from the capture sample as auxiliary information.
-
- @param data A data frame, each row is an observation from the recapture sample.
-  If the row refers to a unit which is also in the capture sample, the data frame
-  contains the information gathered from the recapture sample. If the row refers
-  to a unit only in the recapture sample, those columns for recapture sample data
-  contain zeros.
-
- @param recapture_total Variable of interest recorded in recapture sample
-  Observation
 }
 \details{
 This estimator is a ratio estimator defined by: \eqn{t_c = t_y*

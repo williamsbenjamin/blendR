@@ -4,7 +4,9 @@
 #'   Generalized by Liu et al (2017) for a Complex Sample Setting. Use number of
 #'   capture units as auxiliary information
 #'
-#' @param data A data frame, each row is an observation from the recapture sample
+#' @param data A data frame, each row is an observation from the recapture sample,
+#'  containing information gathered in the recapture sample, whether or not the unit
+#'  is also in the capture sample, and sample design information.
 #'
 #' @param recapture_total Name of variable of interest recorded in the recapture
 #'  sample, from given data frame
@@ -30,8 +32,8 @@
 #'   recapture sample was seen in the capture sample.
 #'
 #' @return Estimate of Total and Standard Error of Estimate
-#'   \item{total}{Estimate of Total of a Variable in Population}
-#'   \item{se}{Standard Error of Estimate of Total}
+#'   \item{total}{Estimate of total of a variable in population}
+#'   \item{se}{Standard error of estimate of total}
 #'
 #' @examples
 #'   s_design <- survey::svydesign(id = ~psu,
