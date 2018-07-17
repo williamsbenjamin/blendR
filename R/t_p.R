@@ -3,14 +3,22 @@
 #' @description Make an Estimate of Total Using Pollock et al's (1994) Estimator
 #'   Generalized by Liu et al (2017) for a Complex Sample Setting. Use number of
 #'   capture units as auxiliary information
-#' @param recapture_total Variable of Total of Interest from a Recapture Sample
-#'   Observation
 #'
-#' @param captured Indicator Variable of Unit being in Capture Sample
+#' @param data A data frame, each row is an observation from the recapture sample
+#'
+#' @param recapture_total Name of variable of interest recorded in the recapture
+#'  sample, from given data frame
+#'
+#' @param captured Name of indicator variable of the sampled unit also being in the
+#'  capture sample, from given data frame
+#'
 #' @param survey_design A complex survey design specified with
 #'   \code{survey::svydesign()}
+#'
 #' @param na_remove Remove NA's? Logical
-#' @param capture_units Total Number of Units in the Capture Sample
+#'
+#' @param capture_units Total number of units in the capture sample
+#'
 #' @details This estimator is a ratio estimator defined by: \eqn{t_p = n_1
 #'   \frac{\hat{t}_y}{\hat{n}_1}} with ratio \eqn{ t_y / n_1}. \eqn{\hat{t}_y =
 #'   \sum{i=1}^{N}w_i  z_i  y_i} where \eqn{z_i} is a sampling indicator,
@@ -25,28 +33,32 @@
 #'   \item{total}{Estimate of Total of a Variable in Population}
 #'   \item{se}{Standard Error of Estimate of Total}
 #'
-#'   @example
+#' @examples
 #'   s_design <- survey::svydesign(id = ~psu,
 #'                                strat = ~stratum,
 #'                                prob = ~prob,
 #'                                nest = T,
 #'                                data = red_snapper_sampled)
 #'
-#'   t_p(recapture_total = red_snapper_sampled$number_caught_ps,
-#'       captured = red_snapper_sampled$captured_indicator,
+#'   t_p(data = red_snapper_sampled,
+#'       recapture_total = number_caught_ps,
+#'       captured = captured_indicator,
 #'       survey_design = s_design,
 #'       capture_units = nrow(self_reports))
 #'
 #'
 #' @export
 
-t_p <- function(recapture_total,
+t_p <- function(data,
+                recapture_total,
                 captured,
                 survey_design,
                 na_remove=T,
                 capture_units){
-  tp_ratio <- survey::svyratio(~recapture_total,
-                               ~captured,
+  recapture_total <- deparse(substitute(recapture_total))
+  captured <- deparse(substitute(captured))
+  tp_ratio <- survey::svyratio(~data[[recapture_total]],
+                               ~data[[captured]],
                                design = survey_design,
                                na.rm = na_remove)
   tot_p <- stats::predict(tp_ratio,

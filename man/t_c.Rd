@@ -5,17 +5,14 @@
 \title{Generalized Capture-Recapture Estimator of Total for Complex Sample,
   Using Values of Total from Capture Sample as Auxiliary Information}
 \usage{
-t_c(recapture_total, captured_total, survey_design, na_remove = TRUE,
+t_c(data, recapture_total, captured_total, survey_design, na_remove = TRUE,
   total_from_capture)
 }
 \arguments{
-\item{recapture_total}{Variable of Total of Interest from a Recapture Sample
-Observation}
+\item{captured_total}{Total of Variable Interest as Recorded in Capture Sample.
+\code{captured_total} = 0 if unit is in the Recapture Sample Only}
 
-\item{captured_total}{Variable of Total of Interest Obtained in Capture Sample
-Observation}
-
-\item{survey_design}{A complex survey design specified with
+\item{survey_design}{A Complex Survey Design, Specified with
 \code{survey::svydesign()}}
 
 \item{na_remove}{Remove NA's? Logical}
@@ -31,7 +28,16 @@ Estimate of Total and Standard Error of Estimate
 \description{
 Make an Estimate of Total Using a Generalized Capture-Recapture
   Estimator from Liu et al (2017) for a Complex Sample Setting. Uses total of
-  variable of interest from the capture sample as auxiliary information
+  variable of interest from the capture sample as auxiliary information.
+
+ @param data A data frame, each row is an observation from the recapture sample.
+  If the row refers to a unit which is also in the capture sample, the data frame
+  contains the information gathered from the recapture sample. If the row refers
+  to a unit only in the recapture sample, those columns for recapture sample data
+  contain zeros.
+
+ @param recapture_total Variable of interest recorded in recapture sample
+  Observation
 }
 \details{
 This estimator is a ratio estimator defined by: \eqn{t_c = t_y*
@@ -43,4 +49,16 @@ This estimator is a ratio estimator defined by: \eqn{t_c = t_y*
   interest recorded in the recapture sample. \eqn{t_y* = \sum{i
   =1}^{N}r_iy*_i} \eqn{r_i} is an indicator of whether the unit is a member
   of the recapture sample.
+}
+\examples{
+  s_design <- survey::svydesign(id = ~psu,
+                               strat = ~stratum,
+                               prob = ~prob,
+                               nest = T,
+                               data = red_snapper_sampled)
+  t_c(data = red_snapper_sampled,
+      recapture_total = number_caught_ps,
+      captured_total = number_caught_np,
+      survey_design = s_design,
+      total_from_capture = sum(self_reports$number_kept))
 }

@@ -2,13 +2,20 @@
 #'   Using Values of Total from Capture Sample as Auxiliary Information
 #' @description Make an Estimate of Total Using a Generalized Capture-Recapture
 #'   Estimator from Liu et al (2017) for a Complex Sample Setting. Uses total of
-#'   variable of interest from the capture sample as auxiliary information
-#' @param recapture_total Variable of Total of Interest from a Recapture Sample
+#'   variable of interest from the capture sample as auxiliary information.
+#'
+#'  @param data A data frame, each row is an observation from the recapture sample.
+#'   If the row refers to a unit which is also in the capture sample, the data frame
+#'   contains the information gathered from the recapture sample. If the row refers
+#'   to a unit only in the recapture sample, those columns for recapture sample data
+#'   contain zeros.
+#'
+#'  @param recapture_total Variable of interest recorded in recapture sample
 #'   Observation
 #'
-#' @param captured_total Variable of Total of Interest Obtained in Capture Sample
-#'   Observation
-#' @param survey_design A complex survey design specified with
+#' @param captured_total Total of Variable Interest as Recorded in Capture Sample.
+#'  \code{captured_total} = 0 if unit is in the Recapture Sample Only
+#' @param survey_design A Complex Survey Design, Specified with
 #'   \code{survey::svydesign()}
 #' @param na_remove Remove NA's? Logical
 #' @param total_from_capture Total of Variable of Interest from all Units in the
@@ -26,25 +33,29 @@
 #'   \item{total}{Estimate of Total of a Variable in Population}
 #'   \item{se}{Standard Error of Estimate of Total}
 #'
-#' @example
+#' @examples
 #'   s_design <- survey::svydesign(id = ~psu,
 #'                                strat = ~stratum,
 #'                                prob = ~prob,
 #'                                nest = T,
 #'                                data = red_snapper_sampled)
-#'   t_c(recapture_total = red_snapper_sampled$number_caught_ps,
-#'       captured_total = red_snapper_sampled$number_caught_np,
+#'   t_c(data = red_snapper_sampled,
+#'       recapture_total = number_caught_ps,
+#'       captured_total = number_caught_np,
 #'       survey_design = s_design,
 #'       total_from_capture = sum(self_reports$number_kept))
 #' @export
 
- t_c <- function(recapture_total,
+ t_c <- function(data,
+                 recapture_total,
                  captured_total,
                  survey_design,
                  na_remove=TRUE,
                  total_from_capture){
-   tc_ratio <- survey::svyratio(~recapture_total,
-                                ~captured_total,
+   recapture_total <- deparse(substitute(recapture_total))
+   captured_total <- deparse(substitute(captured_total))
+   tc_ratio <- survey::svyratio(~data[[recapture_total]],
+                                ~data[[captured_total]],
                                 design = survey_design,
                                 na.rm = na_remove)
    tot_c <- stats::predict(tc_ratio,

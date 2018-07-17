@@ -4,38 +4,57 @@
 \alias{t_y2}
 \title{Multivariate Ratio Estimator of Total for Complex Sample}
 \usage{
-t_y2(delta, captured, survey_design, na_remove = T, capture_units,
+t_y2(data, delta, captured, survey_design, na_remove = T, capture_units,
   total_from_capture)
 }
 \arguments{
-\item{delta}{For Every Unit in the Recapture Sample, Delta is the Value of
-the Variable of Interest Observed in the Recapture Sample Minus the Value
-Observed in the Capture Sample. \eqn{\delta = y_i - r_iy*_i} where
-\eqn{y_i} is the Value of the Variable of Interest for the ith unit in the
-Recapture Sample, \eqn{r_i} is an Indicator of whether the unit is a Member
-of the Capture Sample, and \eqn{y*_i} is the Value of the Variable of
-Interest in the Capture Sample}
+\item{delta}{Name of variable from given data frame. For every unit in the
+recapture sample, delta is the value of the variable of interest observed
+in the recapture sample minus the value observed in the capture sample. If the
+unit in the recapture sample is not also a member of the capture sample,
+\code{delta =0}}
 
-\item{captured}{Indicator Variable of Unit being in Capture Sample}
+\item{captured}{Name of indicator variable of unit being in capture sample,
+from given data frame}
 
 \item{survey_design}{A complex survey design specified with
 \code{survey::svydesign()}}
 
 \item{na_remove}{Remove NA's? Logical}
 
-\item{capture_units}{Total Number of Units in the Capture Sample}
+\item{capture_units}{Total number of units in the capture sample}
 
-\item{total_from_capture}{Total of Variable of Interest from Capture Sample}
+\item{total_from_capture}{Total of variable of interest from all units in the
+capture sample}
 }
 \value{
 Estimate of Total and Standard Error of Estimate
   \item{total}{Estimate of Total of a Variable in Population}
   \item{se}{Standard Error of Estimate of Total}
+
+ @example
+ s_design <- survey::svydesign(id = ~psu,
+                               strat = ~stratum,
+                               prob = ~prob,
+                               nest = T,
+                               data = red_snapper_sampled)
+t_y2(data = red_snapper_sampled,
+     delta = delta_catch,
+     captured = captured_indicator,
+     capture_units = nrow(self_reports),
+     total_from_capture = sum(self_reports$number_kept)
+     )
 }
 \description{
 Make an Estimate of Total Using a Weighted Combination of
   \code{\link{t_p}} and \code{\link{t_y2}} from Liu et al (2017) for a
   Complex Sample Setting.
+
+ @param data A data frame, each row is an observation from the recapture sample.
+  If the row refers to a unit which is also in the capture sample, the data frame
+  contains the information gathered from the recapture sample. If the row refers
+  to a unit only in the recapture sample, those columns for recapture sample data
+  contain zeros. The data frame should contain a variable delta, see below.
 }
 \details{
 This estimator is defined by: \eqn{t_y2 = t_{y*} +

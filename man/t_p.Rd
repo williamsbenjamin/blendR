@@ -4,37 +4,29 @@
 \alias{t_p}
 \title{Generalized Pollock et al's Estimator of Total}
 \usage{
-t_p(recapture_total, captured, survey_design, na_remove = T, capture_units)
+t_p(data, recapture_total, captured, survey_design, na_remove = T,
+  capture_units)
 }
 \arguments{
-\item{recapture_total}{Variable of Total of Interest from a Recapture Sample
-Observation}
+\item{data}{A data frame, each row is an observation from the recapture sample}
 
-\item{captured}{Indicator Variable of Unit being in Capture Sample}
+\item{recapture_total}{Name of variable of interest recorded in the recapture
+sample, from given data frame}
+
+\item{captured}{Name of indicator variable of the sampled unit also being in the
+capture sample, from given data frame}
 
 \item{survey_design}{A complex survey design specified with
 \code{survey::svydesign()}}
 
 \item{na_remove}{Remove NA's? Logical}
 
-\item{capture_units}{Total Number of Units in the Capture Sample}
+\item{capture_units}{Total number of units in the capture sample}
 }
 \value{
 Estimate of Total and Standard Error of Estimate
   \item{total}{Estimate of Total of a Variable in Population}
   \item{se}{Standard Error of Estimate of Total}
-
-  @example
-  s_design <- survey::svydesign(id = ~psu,
-                               strat = ~stratum,
-                               prob = ~prob,
-                               nest = T,
-                               data = red_snapper_sampled)
-
-  t_p(recapture_total = red_snapper_sampled$number_caught_ps,
-      captured = red_snapper_sampled$captured_indicator,
-      survey_design = s_design,
-      capture_units = nrow(self_reports))
 }
 \description{
 Make an Estimate of Total Using Pollock et al's (1994) Estimator
@@ -51,4 +43,19 @@ This estimator is a ratio estimator defined by: \eqn{t_p = n_1
   capture sample and is estimated by \eqn{\hat{n}_1 = \sum{i=1}^{N}w_i z_i
   r_i} where \eqn{r_i} is an indicator of whether the unit is a member of the
   recapture sample was seen in the capture sample.
+}
+\examples{
+  s_design <- survey::svydesign(id = ~psu,
+                               strat = ~stratum,
+                               prob = ~prob,
+                               nest = T,
+                               data = red_snapper_sampled)
+
+  t_p(data = red_snapper_sampled,
+      recapture_total = number_caught_ps,
+      captured = captured_indicator,
+      survey_design = s_design,
+      capture_units = nrow(self_reports))
+
+
 }
