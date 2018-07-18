@@ -2,7 +2,7 @@
 title: "BlendR: Combining a Probability and a Non-Probability Sample in a Capture-Recapture Setting"
 author: "Benjamin Williams"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::pdf_document
 bibliography: prospectus_bib.bib
 csl: american-statistical-association.csl
 vignette: >
