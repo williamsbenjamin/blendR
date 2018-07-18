@@ -80,6 +80,6 @@ t_y2 <- function(data,
   se_y2 <- stats::predict(t_y2_ratio,
                          total = capture_units,
                          na.rm = na_remove)$se
-  return(list(total = tot_y2,
-              se = se_y2))
+  return(list(total = tot_y2[1,1],
+              se = se_y2[1,1]))
 }

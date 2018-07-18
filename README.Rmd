@@ -32,4 +32,16 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 ## basic example code
+library(blendR)
+s_design <- survey::svydesign(id = ~psu,
+                              strat = ~stratum,
+                              prob = ~prob,
+                              nest = T,
+                              data = red_snapper_sampled)
+
+t_p(data = red_snapper_sampled,
+    recapture_total = number_caught_ps,
+    captured = captured_indicator,
+    survey_design = s_design,
+    capture_units = nrow(self_reports))
 ```

@@ -69,6 +69,6 @@ t_p <- function(data,
   se_p <- stats::predict(tp_ratio,
                           total=capture_units,
                           na.rm = na_remove)$se
-  return(list(total = tot_p,
-              se = se_p))
+  return(list(total = tot_p[1,1],
+              se = se_p[1,1]))
 }

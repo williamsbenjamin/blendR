@@ -69,6 +69,6 @@
    se_c <- stats::predict(tc_ratio,
                           total=total_from_capture,
                           na.rm = na_remove)$se
-   return(list(total = tot_c,
-               se = se_c))
+   return(list(total = tot_c[1,1],
+               se = se_c[1,1]))
  }
