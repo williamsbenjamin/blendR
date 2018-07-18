@@ -47,7 +47,7 @@
 #'   \item{total}{Estimate of total of variable of interest in population}
 #'   \item{se}{Standard error of estimate of total}
 #'
-#'  @example
+#' @examples
 #'  s_design <- survey::svydesign(id = ~psu,
 #'                                strat = ~stratum,
 #'                                prob = ~prob,

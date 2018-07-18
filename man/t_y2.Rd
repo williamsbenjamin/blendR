@@ -38,19 +38,6 @@ capture sample}
 Estimate of Total and Standard Error of Estimate
   \item{total}{Estimate of total of variable of interest in population}
   \item{se}{Standard error of estimate of total}
-
- @example
- s_design <- survey::svydesign(id = ~psu,
-                               strat = ~stratum,
-                               prob = ~prob,
-                               nest = T,
-                               data = red_snapper_sampled)
-t_y2(data = red_snapper_sampled,
-     delta = delta_catch,
-     captured = captured_indicator,
-     capture_units = nrow(self_reports),
-     total_from_capture = sum(self_reports$number_kept)
-     )
 }
 \description{
 Make an Estimate of Total Using a Weighted Combination of
@@ -70,4 +57,17 @@ This estimator is defined by: \eqn{t_y2 = t_{y*} +
   \eqn{y*_i} is the value of the variable of interest recorded in the
   recapture sample. \eqn{t_{y*} = \sum{i =1}^{N}r_iy*_i} \eqn{r_i} is an
   indicator of whether the unit is a member of the recapture sample.
+}
+\examples{
+ s_design <- survey::svydesign(id = ~psu,
+                               strat = ~stratum,
+                               prob = ~prob,
+                               nest = T,
+                               data = red_snapper_sampled)
+t_y2(data = red_snapper_sampled,
+     delta = delta_catch,
+     captured = captured_indicator,
+     capture_units = nrow(self_reports),
+     total_from_capture = sum(self_reports$number_kept)
+     )
 }
