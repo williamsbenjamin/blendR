@@ -1,4 +1,4 @@
-#' @title Generalized Pollock et al's Estimator of Total
+#' @title Generalized Capture-Recapture Estimator, Extension of Pollock et al's Estimator of Total
 #'
 #' @description Make an Estimate of Total Using Pollock et al's (1994) Estimator
 #'   Generalized by Liu et al (2017) for a Complex Sample Setting. Use number of

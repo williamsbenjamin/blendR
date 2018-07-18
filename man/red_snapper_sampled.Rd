@@ -27,9 +27,9 @@ by Texas Parks and Wildlife. A probability sample of
 docks was selected and interviewers boarded returning charter
 fishing boats and counted the number of Red Snapper fish caught and
 number of anglers aboard. The captains of such boats had the opportunity
-to voluntarily self-report the number of Red Snapper caught and number of
-anglers aboard. Captains who self-reported were still eligible to be sampled
-in the dockside intercept. The self-reports represent the "capture" sample
-and the dockside intercept represents the "recapture" sample.
+to voluntarily self-report (via a smartphone app) the number of Red Snapper
+caught and number of anglers aboard. Captains who self-reported were still
+eligible to be sampled in the dockside intercept. The self-reports represent
+the "capture" sample and the dockside intercept represents the "recapture" sample.
 }
 \keyword{datasets}

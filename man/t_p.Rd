@@ -2,7 +2,7 @@
 % Please edit documentation in R/t_p.R
 \name{t_p}
 \alias{t_p}
-\title{Generalized Pollock et al's Estimator of Total}
+\title{Generalized Capture-Recapture Estimator, Extension of Pollock et al's Estimator of Total}
 \usage{
 t_p(data, recapture_total, captured, survey_design, na_remove = T,
   capture_units)
