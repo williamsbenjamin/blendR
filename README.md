@@ -21,8 +21,50 @@ Example
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-## basic example code
+## Data from capture-recapture sampling program in 2016 by Texas Parks and Wildlife
+## Captains could voluntarily self-report (via a smartphone app) about their catch of Red Snapper fish (non-probability sample) and could be sampled in a dockside intercept sample (probability sample). The self-reports are the capture sample and the dockside intercept is the probability sample
+
+library(tibble)
 library(blendR)
+
+## Dataset for boats sampled in the dockside intercept, if their captains also self-reported, that data included as well
+
+red_snapper_sampled
+#> # A tibble: 398 x 12
+#>       id anglers_ps number_caught_ps stratum   prob sample_weight
+#>    <int>      <int>            <int> <chr>    <dbl>         <dbl>
+#>  1     1          8               11 weekday 0.184           5.44
+#>  2     2          3               12 weekend 0.241           4.15
+#>  3     3          3               12 weekend 0.241           4.15
+#>  4     4          5               20 weekend 0.241           4.15
+#>  5     5          6               24 weekend 0.241           4.15
+#>  6     6          8               24 weekend 0.241           4.15
+#>  7     7          3                1 weekday 0.0662         15.1 
+#>  8     8          4               10 weekday 0.184           5.44
+#>  9     9          8               24 weekday 0.184           5.44
+#> 10    10          4               16 weekday 0.0662         15.1 
+#> # ... with 388 more rows, and 6 more variables: number_caught_np <int>,
+#> #   anglers_np <int>, captured_indicator <int>, delta_catch <int>,
+#> #   delta_angler <int>, psu <chr>
+
+## Dataset for the self-reported boats
+
+self_reports 
+#> # A tibble: 117 x 2
+#>    anglers number_kept
+#>      <int>       <int>
+#>  1       2           8
+#>  2       4          16
+#>  3       4          16
+#>  4       3           4
+#>  5       4          16
+#>  6       4          16
+#>  7       2           7
+#>  8       5          20
+#>  9       3           6
+#> 10       2           8
+#> # ... with 107 more rows
+
 s_design <- survey::svydesign(id = ~psu,
                               strat = ~stratum,
                               prob = ~prob,

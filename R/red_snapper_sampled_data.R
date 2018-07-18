@@ -9,6 +9,10 @@
 #' caught and number of anglers aboard. Captains who self-reported were still
 #' eligible to be sampled in the dockside intercept. The self-reports represent
 #' the "capture" sample and the dockside intercept represents the "recapture" sample.
+#' If a row in \code{red_snapper_sampled} refers to a unit which is also in the capture sample, the data frame
+#' contains the information gathered from the recapture sample. If the row refers
+#' to a unit in the recapture sample only, those columns for recapture sample data
+#' contain zeros.
 #'
 #'@format A data frame with 398 rows and 11 variables:
 #'

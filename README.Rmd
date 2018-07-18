@@ -31,8 +31,20 @@ devtools::install_github("williamsbenjamin/blendR")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-## basic example code
+## Data from capture-recapture sampling program in 2016 by Texas Parks and Wildlife
+## Captains could voluntarily self-report (via a smartphone app) about their catch of Red Snapper fish (non-probability sample) and could be sampled in a dockside intercept sample (probability sample). The self-reports are the capture sample and the dockside intercept is the probability sample
+
+library(tibble)
 library(blendR)
+
+## Dataset for boats sampled in the dockside intercept, if their captains also self-reported, that data included as well
+
+red_snapper_sampled
+
+## Dataset for the self-reported boats
+
+self_reports 
+
 s_design <- survey::svydesign(id = ~psu,
                               strat = ~stratum,
                               prob = ~prob,
