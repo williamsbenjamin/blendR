@@ -98,5 +98,6 @@ In this package, `t_diff()` is the function to use $t_{diff}$.
 Each estimator described above may suffer from undercoverage if the sampling frame is incomplete. A working paper by Stokes, Williams, McShane, and Zalsha, is looking at the effects of non-sampling errors on these estimators. The reference will be updated when the article is published.
 
 Each of the four estimators returns the values `total` and `se`, which are the estimates of total of the variable of interest and its standard error, respectively.
+
 ##References
 
