@@ -1,7 +1,7 @@
 Package: blendR
 Type: Package
 Title: Blending a Probablilty Sample and a Non-Probability Sample in a Capture-Recapture Setting
-Version: 0.1.0
+Version: 1.0
 Author: Benjamin Williams
 Maintainer: Benjamin Williams <benjamin@smu.edu>
 Description: Provides estimators of total when combining two samples within a capture-recapture framework.
