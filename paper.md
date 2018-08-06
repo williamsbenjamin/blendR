@@ -28,5 +28,5 @@ These estimators are currently used to estimate the total catch of the fish in s
 
 The National Research Council has advised NOAA to continue experiments with electronic reporting to better estimate the total fish caught in marine waters by recreational anglers. Accurate estimation is critical to setting accurate fishing seasons and bag limits. As such, this is an important research field and extends to many other fields. Having the estimators widely available in [blendR](https://github.com/williamsbenjamin/blendR) will allow various agencies and investigators to make their own valid estimates harnessing the useful information from non-probability samples.
 
-#References
+# References
 
