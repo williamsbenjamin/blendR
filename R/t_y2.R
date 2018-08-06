@@ -55,6 +55,7 @@
 #'                                data = red_snapper_sampled)
 #' t_y2(data = red_snapper_sampled,
 #'      delta = delta_catch,
+#'      survey_design = s_design,
 #'      captured = captured_indicator,
 #'      capture_units = nrow(self_reports),
 #'      total_from_capture = sum(self_reports$number_kept)
