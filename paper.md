@@ -10,8 +10,8 @@ authors:
    affiliation: 1
 affiliations:
   -name: Department of Statistical Science, Southern Methodist University
-  index: 1
-date: "August 6, 2018"
+   index: 1
+date: 6 August 2018
 bibliography: blendR_bib.bib
 ...
 
