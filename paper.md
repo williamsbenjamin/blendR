@@ -1,13 +1,16 @@
 ---
 title: "Combining a Probability and a Non-Probability Sample in a Capture-Recapture Setting"
 tags:
-  - non-probability sampling
-  - combining data sources
-  - capture-recapture sampling
+- non-probability sampling
+- combining data sources
+- capture-recapture sampling
 authors: 
- - name: "Benjamin Williams"
-   orcid: 0000-0001-8474-5066
-   affiliation: "Department of Statistical Science, Southern Methodist University"
+- name: "Benjamin Williams"
+  orcid: 0000-0001-8474-5066
+  affiliation: 1
+affiliations:
+- name: "Department of Statistical Science, Southern Methodist University"
+  index: 1
 date: 6 August 2018
 bibliography: blendR_bib.bib
 ...
