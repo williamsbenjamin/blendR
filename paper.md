@@ -7,10 +7,7 @@ tags:
 authors: 
  - name: "Benjamin Williams"
    orcid: 0000-0001-8474-5066
-   affiliation: 1
-affiliations:
-  -name: Department of Statistical Science, Southern Methodist University
-   index: 1
+   affiliation: "Department of Statistical Science, Southern Methodist University"
 date: 6 August 2018
 bibliography: blendR_bib.bib
 ...
