@@ -3,6 +3,8 @@
 blendR
 ======
 
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.00886/status.svg)](https://doi.org/10.21105/joss.00886)
+
 The goal of blendR is to provide statistically valid estimators of total (and standard errors) when blending a non-probability sample with a probability sample. The two samples are considered to follow capture-recapture methodology, with the capture sample being the non-probability sample and the recapture sample being the probability sample. This package is based upon research by Liu et al (2017), Breidt, Opsomer, and Huang (2018), and dissertation research by the package author. Additional estimators will be released in future versions.
 
 These estimators are important and currently used by Texas Parks and Wildlife to estimate the total number of Red Snapper fish caught. Combining data sources is an important research area due to the prevalence of big data in both industry and academia. These estimators can easily extend to other areas of interest, for example, the internet of things, insurance claims, and estimation of the death toll due to a natural disaster.
