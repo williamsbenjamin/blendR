@@ -6,7 +6,7 @@ output: rmarkdown::html_vignette
 bibliography: prospectus_bib.bib
 csl: american-statistical-association.csl
 vignette: >
-  %\VignetteIndexEntry{BlendR}
+  %\VignetteIndexEntry{blendR overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   
