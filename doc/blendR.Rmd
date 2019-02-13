@@ -1,0 +1,101 @@
+---
+title: "blendR Combining a Probability and a Non-Probability Sample in a Capture-Recapture Setting"
+author: "Benjamin Williams"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+bibliography: prospectus_bib.bib
+csl: american-statistical-association.csl
+vignette: >
+  %\VignetteIndexEntry{blendR Combining a Probability and a Non-Probability Sample in a Capture-Recapture Setting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+##Introduction 
+This package provides several estimators of total for combining a non-probability sample with a probability sample.  In general, probability samples are preferred to non-probability samples because the sampling variance of the estimators calculated from probability samples can be determined using standard sampling theory. Even non-sampling errors, such as non-response bias, may be easier to assess and mitigate for probability samples. The primary disadvantage of non-probability samples is the potential for biased estimation stemming from undercoverage and a lack of representativeness in the samples. Without external sources of information, these sample deficiencies cannot be detected.
+
+In reality, it is usually easier to obtain a non-probability sample than a probability sample. For example, a frame may not be available, which complicates the selection of a probability sample. A non-probability sample, such as one using data from volunteers, does not require an expensive nonresponse follow-up. The larger the sample, the more information it may contain. This is an attractive option for analysts working with limited resources while studying elusive populations. As a result, statisticians have begun to investigate methods for improving estimation using data from non-probability samples. One such method is augment a non-probability sample with a probability sample to lend strength to the probability sample in the for of additional data.
+
+There are many ways of combining data sources. In this package the combination of a non-probability sample with a probability sample occurs under the assumptions of a capture-recapture model. 
+
+##Capture-Recapture Methodology
+
+Capture-recapture methods are powerful ways to estimate total in specific scenarios. In a classic example, suppose a researcher wishes to know the total number of fish ($N$) in the local fishing hole. On the initial fishing trip, she catches $n_1$ fish. These fish are tagged so they can be identified later. The next day she returns to the same fishing hole and catches $n_2$ fish. In this second catch, suppose $m$ fish were also caught on the first day, identifiable by their tag. If the proportion of tagged fish in the second sample is approximately equal to the proportion of tagged fish in the population of fish, then $E(\frac{n_1}{N}) \approx  \frac{m}{n_2}$. This leads to the Lincoln-Peterson estimator of total @cren_note_1965: $$\hat{N} = \frac{n_1 n_2}{m}.$$
+
+$\hat{N}$ is the maximum likelihood estimator of $N$ under the hypergeometric model, which assumes the recapture sample is a simple random sample (SRS). This SRS assumption does not necessarily extend to the initial sample. 
+
+##Sampling Set-up
+The estimators from this package assume the non-probability sample is analogous to the initial capture sample, while the probability sample acts as the recapture sample. For the estimators used in this package, the data must be gathered such that units in the non-probability sample may be gathered into the probability sample with some positive, known probability. Each sample must record the same variable of interest, though this is not required for the first estimator below.
+
+Define the universe of interest to be made up of $N$ units and call the population $U$. Call the probability sample $s_2$ and the non-probability sample $d_1$, since it can be thought of as a domain. There are $n_2$ units sampled in $s_2$ and $n_1$ units captured in the non-probability sample $d_1$. Denote by $m$ the number of units present in both $d_1$ and $s_2$. Then the number of units in $d_1$ only is $n_1 - m$, and the number of units in $s_2$ only is $n_2-m$. The objective is to estimate $t_y$ from the data from the two samples, when $N$ is unknown. 
+
+Define the variable of interest for each unit in the population as $y_i$ ($i = 1,...,N$). Thus the goal is to estimate $t_y = \sum_{i=1}^{N}y_i$. In the non-probility sample, the variable of interest for the $i^{th}$ unit is denoted $y^*_i$.
+
+If the $i^{th}$ unit is not a part of the non-probability sample, $y^*_i$ is defined to be 0. $y_i$ is distinguished from $y^*_i$ as measurement error or other non-sampling errors.
+
+The estimators included in this package are especially useful when the non-probability sample has access to more members of the population than the probability sample does. That is, if the non-probability sample can include units which otherwise are not able to be sampled, these estimators are extremely useful. An example of this may be a voluntary (non-probability/capture) sample on a street corner and a random sample (probability/recapture) of households in the area. It may be that some respondents to the voluntary sample do not live in houses in the area, perhaps they are homeless. The recapture sample cannot sample these people, but they may be a part of the universe of interest.
+
+The first three estimators are taken from @liu_estimation_2017 and the last one from @breidt_model-assisted_2018. The estimators are now described.
+
+##Estimator 1
+
+The first estimator is denoted $\hat{t}_{yp}$ and is a generalized version of an estimator developed by @pollock_use_1994. Their data consists of a probability sample of fishing docks where interviewers record fish catch by incoming boats and a voluntary sample of trip counts (but not catch) self-reported by fishing captains. In this method the capture and the recapture samples are used to estimate the total number of trips $N$, which is then multiplied by an estimate of mean catch, determined from the recapture sample only :
+$$\hat{t}_{yp} = \hat{N}\hat{\bar{y}}$$ where $\hat{N}$ is defined above for a capture-recapture setting and $\hat{\bar{y}}$ is the average catch from the probability intercept sample @pollock_use_1994. The expected value of this estimator is equal to $t_y$ when the intercept sample is a SRS of $U$.
+
+Liu et al generalizes this estimator for a complex sample design with sampling weights: 
+$$ \hat{t}_{yp}=\frac{n_1}{\hat{p}_1}\hat{\bar{y}}=n_1\frac{\hat{t}_y}{\hat{n}_1} $$
+where $r_i$ is an indicator of whether a unit is a member of the non-probability sample
+\[r_i = 
+\begin{cases}
+	1 & \text{if $i$ $\in$ $d_1$}\\
+	0 & \text{otherwise}\\
+\end{cases}
+\]
+and $\hat{n}_1=\sum_{i \in s_2}w_ir_i$, $\hat{p}_1=\frac{\sum_{i \in s_2}^{}w_ir_i}{\sum_{i \in s_2}w_i}$, and $\frac{\hat{t}_y}{\hat{n}_1}=\frac{\sum_{i \in s_2}^{}w_iy_i}{\sum_{i \in s_2}w_ir_i}$ are Horvitz-Thompson estimators of $n_1$, $p_1=\frac{n_1}{N}$ (the rate that non-probability units are selected into the probability sample), and $\frac{t_y}{n_1}$, respectively. The $w_i's$ are sampling weights, computed as reciprocals of the selection probabilities. Then, $\hat{t}_{yp}$ is a ratio estimator with ratio $B_p=\frac{t_y}{n_1}$ and with $r_i$ as the auxiliary variable.
+
+To use $\hat{t}_{yp}$, one only needs to know the values of the variable of interest ($y_i$) from the probability sample, and whether or not that unit was also in the capture (non-probability) sample ($r_i$).
+
+In this package, `t_p()` is the function to use $\hat{t}_{yp}$. This function requires a dataset parameter denoted `data`. `data` should be a data frame where each row is an observation from the recapture sample, containing information gathered from the recapture sample, whether or not the unit is also in the capture sample, along with sample design information. The parameter `recapture_total` is the value of the variable for each unit in the recapture (probability) sample. `captured` is an indicator variable of whether the sample unit (sampled in recapture sample) is also in the capture sample. `survey_design` is a specified (possibly complex) survey design specified with `survey::svydesign()` [survey package](https://cran.r-project.org/web/packages/survey/survey.pdf). `na_remove` is set to `TRUE` as a default, and `capture_units` is a numeric value of the total number of units in the capture sample.
+
+##Estimator 2
+The next estimator uses the value of the variable of interest collected in the non-probability sample (denoted $y^*_i$) as an auxiliary variable:
+$$\hat{t}_{yc}=t_{y^*}\frac{\hat{t}_y}{\hat{t}_{y^*}}$$
+where $t_{y^*}=\sum_{i=1}^{n_1}r_i{y_i}^*$, $\hat{t}_y=\sum_{i \in s_2}w_iy_i$, and $\hat{t}_{y^*}=\sum_{i \in s_2}w_ir_i{y_i}^*$. $t_{y^*}$ is the total of the variable of interest for the entire non-probability sample, and $\hat{t}_{y^*}$ is its estimator. $\hat{t}_{yc}$ is also a ratio estimator with auxiliary variable $r_iy^*_i$ and ratio $B_c = \frac{t_y}{t_{y^*}}$. $\hat{t}_{yc}$ takes the form of a capture-recapture estimator and uses the values from the non-probability sample as auxiliary information.
+
+In this package, `t_c()` is the function to use $\hat{t}_{yc}$. This function requires a dataset called `data`, which is a dataframe, where each row is an observation from the recapture sample. If the row refers to a unit which is also in the capture sample, the data frame contains the information gathered from the recapture sample. If the row refers to a unit in the recapture sample only, those columns for recapture sample data should contain zeros. The data frame also should contain sample design information. The parameter `recapture_total` is the value of the variable for each unit in the recapture (probability) sample. `captured_total` is the value of the variable for each unit in the capture (non-probability) sample. `survey_design` is a specified surey design, as described above. `na_remove` is set to `TRUE` as a default, and `total_from_capture` is a numeric value of the sum of all the values of the variable of interest from the capture sample ($t_{y^*}$).
+
+##Estimator 3
+The third estimator is a special case of a weighted combination of $\hat{t}_{yp}$ and $\hat{t}_{yc}$ called $t_{MR}$. 
+$$\hat{t}_{MR}=(1-W_{SRS})\hat{t}_{yp}+W_{SRS}\hat{t}_{yc}$$
+$\hat{t}_{MR}$ is a multivariate ratio estimator (Olkin, 1958). The optimal weight $W_{SRS}$ if the recapture sample were a SRS would be:
+$$W_{SRS}=\frac{t_{y^*}}{t_y}\frac{S_{1,yy^*}}{S_{1y^*}^2}=\frac{t_{y^*}}{t_y}\frac{S_{1y}}{S_{1y^*}}R_{1,yy^*}$$
+where $S_{1,yy^*}$ is the covariance of $y$ and $y^*$ in $d_1$, $S^2_{1y^*}$ is the variance of $y^*$ in $d_1$, $S_{1y}$ is the standard deviation of $y$ in $d_1$, and $R_{1,yy^*}$ is the correlation of $y$ and $y^*$ in $d_1$. 
+
+In applications, $W_{SRS}$ will be unknown, but it can be consistently estimated by $$\hat{W}_{SRS} = \frac{t_{y*}}{\hat{t}_{yc}}.$$
+
+When $\hat{W}_{SRS}$ is substituted for $W_{SRS}$, the resulting estimator simplifies to: $$ \hat{t}_{y2} = t_{y*} + \frac{n_1}{\hat{n}_1}(\hat{t}_y - \hat{t}_{y*}).$$
+
+This estimator is proposed even for complex sample designs. $\hat{t}_{y2}$ adjusts the total of the variable of interest from the capture sample additively rather than multiplicatively, as $\hat{t}_{yc}$ does.  
+
+In this package, `t_y2()` is the function to use $\hat{t}_{y2}$. This function requires a dataset called `data`, which is a dataframe where each row is an observation from the recapture sample. If the row refers to a unit which is also in the capture sample, the data frame contains the information gathered from the recapture sample. If the row refers to a unit only in the recapture sample, those columns for recapture sample data contain zeros. The data frame should contain a variable `delta`, see below, and and sample design information. The parameter `delta` is a variable from `data`. For every unit in the recapture sample, `delta` is the value of the variable of interest observed in the recapture sample minus the value observed in the capture sample. If the unit in the recapture sample is not also a member of the capture sample, `delta`$= 0$. `captured` is an indicator variable of a unit being in the capture sample. `survey_design` is a survey design, described above, `na_remove` is set to `TRUE` as a default, `capture_units` is a numeric value of the total number of units in the capture sample, and `total_from_capture` is a numeric value of the sum of all the values of the variable of interest from the capture sample ($t_{y^*}$).
+
+##Estimator 4
+
+The final estimator is a difference estimator, denoted $t_{diff}$, proposed by @breidt_model-assisted_2018. The estimator assumes the sampling frame is complete. That is, for unbiased and valid estimation, every unit must have a known positive probability of being selected into the sample.
+
+The difference estimator is expressed as: $$ t_{diff} = t^*_y + (\hat{t}_y + \hat{t}^*_y) $$. In this package, `t_diff()` is the function to use $t_{diff}$. This function requires a dataset called `data`, which is a dataframe where each row is an observation from the recapture sample. If the row refers to a unit which is also in the capture sample, the data frame contains the information gathered from the recapture sample. If the row refers to a unit only in the recapture sample, those columns for recapture sample data contain zeros. The data frame should contain a variable `delta`, see below, and and sample design information. The parameter `delta` is a variable from `data`. For every unit in the recapture sample, `delta` is the value of the variable of interest observed in the recapture sample minus the value observed in the capture sample. If the unit in the recapture sample is not also a member of the capture sample, `delta`$= 0$. `survey_design` is a survey design, described above, `na_remove` is set to `TRUE` as a default, and `total_from_capture` is a numeric value of the sum of all the values of the variable of interest from the capture sample ($t_{y^*}$).
+
+Each estimator described above may suffer from undercoverage if the sampling frame is incomplete. In general, $$ t_{y2} $$ performs best out of the ratio estimators, in terms of standard error. However, depending on the available data, not all estimators may be appropriate. Dissertation research by the author (Benjamin Williams) is comparing all the estimators under more situations. A working paper by Stokes, Williams, McShane, and Zalsha, is looking at the effects of non-sampling errors on these estimators. The reference will be updated when the article is published.
+
+Each of the four estimators returns the values `total` and `se`, which are the estimates of total of the variable of interest and its standard error, respectively.
+
+##References
+
