@@ -33,4 +33,3 @@ The National Research Council has advised NOAA to continue experiments with elec
 This work is part of dissertation research by the author (Benjamin Williams). It is also being used in working papers regarding non-sampling errors and sample size calculations for electronic reporting experiments by a fisheries research team at Southern Methodist University led by [Lynne Stokes](https://www.smu.edu/News/Experts/Lynn-Stokes). Bug reports, contributions, and other useful comments are welcomed as [issue tickets](https://github.com/williamsbenjamin/blendR/issues) on Github and will be attended to in a timely manner.
 
 # References
-
